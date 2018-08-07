@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateOrdenentregaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form id="orden">
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateOrdenentregaLabel_codigoOrden}" for="codigoOrden" />
+                    <h:inputText id="codigoOrden" value="#{ordenentregaController.selected.codigoOrden}" title="#{bundle.CreateOrdenentregaTitle_codigoOrden}" required="true" requiredMessage="#{bundle.CreateOrdenentregaRequiredMessage_codigoOrden}"/>
+                    <h:outputLabel value="#{bundle.CreateOrdenentregaLabel_codigoTecnico}" for="codigoTecnico" />
+                    <h:selectOneMenu id="codigoTecnico" value="#{ordenentregaController.selected.codigoTecnico}" title="#{bundle.CreateOrdenentregaTitle_codigoTecnico}" >
+                        <f:selectItems value="#{tecnicosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>  
+                <h:panelGrid columns="2">
+                   <h:outputLabel value="#{bundle.CreateOrdenInsumosLabel_insumos}" for="insumos" />
+                   <h:selectOneMenu id="insumos" value="#{ordenentregaController.selected.ordenInsumosCollection}" 
+                                    title="#{bundle.CreateOrdenInsumosTitle_insumos}" required="true" 
+                                    requiredMessage="#{bundle.CreateOrdenInsumosRequiredMessage_insumos}">
+                        <f:selectItems value="#{insumosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateOrdenInsumosLabel_cantidad}" for="cantidad" />
+                    <h:inputText id="cantidad" value="#{ordenInsumosController.selected.cantidad}" title="#{bundle.CreateOrdenInsumosTitle_cantidad}" />
+                    
+                   
+                </h:panelGrid>
+                <!--h:panelGroup>                    
+                    <p:dataList styleClass="datalistInsumos" id="selectInsumo" value="{listadosController.listadoInsumos}" 
+                                    var="selectedInsumo"  type="ordered" > 
+
+                            <p:commandLink styleClass="ui-icon ui-icon-check" style="float:left;margin-right:5px;" 
+                                           action="{ordenentregaController.addTempInsumo(selectedInsumo)}" update=":orden:detalleOrden"> 
+                            </p:commandLink>   
+                                {selectedInsumo.descripcion}
+                      </p:dataList> 
+                    
+                    <p:dataTable id="detalleOrden" value="{ordenentregaController.listadoInsumosTemp}" var="insumo">
+                        <p:column headerText="Id Insumo" >
+                            <h:outputText value="{insumo.codigo}" style="display:block" />
+                        </p:column>
+                        <p:column headerText="Nombre Insumo" >
+                            <h:outputText value="{insumo.descripcion}" style="display:block" />
+                        </p:column>
+                       
+                        
+                    </p:dataTable>
+                    
+            </h:panelGroup!-->
+               
+                
+                <br />
+                <h:commandLink action="#{ordenentregaController.validarExistencia}" value="#{bundle.CreateOrdenentregaSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{ordenentregaController.prepareList}" value="#{bundle.CreateOrdenentregaShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateOrdenentregaIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

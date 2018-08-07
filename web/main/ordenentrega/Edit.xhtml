@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditOrdenentregaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditOrdenentregaLabel_codigoOrden}" for="codigoOrden" />
+                    <h:inputText id="codigoOrden" value="#{ordenentregaController.selected.codigoOrden}" title="#{bundle.EditOrdenentregaTitle_codigoOrden}" required="true" requiredMessage="#{bundle.EditOrdenentregaRequiredMessage_codigoOrden}"/>
+                    <h:outputLabel value="#{bundle.EditOrdenentregaLabel_codigoTecnico}" for="codigoTecnico" />
+                    <h:selectOneMenu id="codigoTecnico" value="#{ordenentregaController.selected.codigoTecnico}" title="#{bundle.EditOrdenentregaTitle_codigoTecnico}" >
+                        <f:selectItems value="#{tecnicosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{ordenentregaController.update}" value="#{bundle.EditOrdenentregaSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditOrdenentregaViewLink}"/>
+                <br />
+                <h:commandLink action="#{ordenentregaController.prepareList}" value="#{bundle.EditOrdenentregaShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditOrdenentregaIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
